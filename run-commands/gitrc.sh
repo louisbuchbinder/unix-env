@@ -31,7 +31,7 @@ function ga {
 function gc {
 	local ARGS="$*"
 	local MESSAGE=${1?"ERROR: expected a commit message to be defined. Usage: gc message [flags]"}
-	local ${ARGS:${#MESSAGE}}
+	local FLAGS=${ARGS:${#MESSAGE}}
 
 	git commit -m "$MESSAGE" $FLAGS
 }
