@@ -19,6 +19,7 @@ alias gpl='git pull '
 alias gprum='git pull --rebase upstream master'
 alias gpo='push-origin '
 alias gpof='gpo -f '
+alias gdb='delete-branch '
 
 function ga {
 	local FILES="$*"
@@ -61,7 +62,7 @@ function delete-branch {
 
 	for BRANCH in "$BRANCHES"; do
 		git branch -D $BRANCH
-		git push --delete $BRANCH --no-verify
+		git push --delete origin $BRANCH --no-verify
 	done
 }
 
