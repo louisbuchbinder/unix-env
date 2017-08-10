@@ -20,6 +20,7 @@ alias gprum='git pull --rebase upstream master'
 alias gpo='push-origin '
 alias gpof='gpo -f '
 alias gdb='delete-branch '
+alias gac='ga && gc '
 
 function ga {
 	local FILES="$*"
