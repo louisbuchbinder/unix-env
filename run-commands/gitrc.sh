@@ -49,8 +49,8 @@ function gsquash {
 		return 1
 	fi
 
-	if 	git reset --soft HEAD~$COMMITS &&
-			git commit -m $MESSAGE; then
+	if 	! git reset --soft HEAD~$COMMITS ||
+			! git commit -m "$MESSAGE"; then
 		echo "gsquash utility failed"
 		return 1
 	fi
