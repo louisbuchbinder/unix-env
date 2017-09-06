@@ -69,7 +69,7 @@ function delete-branch {
 }
 
 function current-branch {
-	local BRANCH=`git branch -v | egrep '^*'` # locate the current git branch labeled with the literal '*'
+	local BRANCH=`git branch -v | egrep '^\*'` # locate the current git branch labeled with the leading literal '*'
 	if [ -z "$BRANCH" ]; then
 		echo 'No current branch found'
 		return 1
