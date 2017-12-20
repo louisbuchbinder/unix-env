@@ -1,0 +1,23 @@
+function AwsMfaLogin () {
+	local CODE=$1
+
+	aws sts get-session-token \
+	--serial-number $AWS_MFA_SERIAL_NUMBER \
+	--token-code $CODE | \
+	\
+	python -c '
+import json, sys
+obj = json.load(sys.stdin)
+secret = obj["Credentials"]["SecretAccessKey"]
+key = obj["Credentials"]["AccessKeyId"]
+token = obj["Credentials"]["SessionToken"]
+print("""[default]
+aws_access_key_id = %s
+aws_secret_access_key = %s
+aws_session_token = %s
+""" %(key, secret, token))
+' \
+	> ~/.aws/temp &&
+	mv ~/.aws/temp ~/.aws/credentials ||
+	rm ~/.aws/temp
+}
