@@ -1,16 +1,13 @@
 function AwsMfaLogin () {
-  local TOKEN=$1
-  local USER=$2
+  local USER=$1
+  local TOKEN=$2
 
-  if [ -z $TOKEN ]; then
+  if [ -z $TOKEN ] || [ -z $USER ]; then
   	echo "Usage: AwsMfaLogin <TOKEN> <USER>"
   	return 1
   fi
 
-  if [ -z $USER ]; then
-    USER=buchbiner-dev
-  fi
-
+  # This could introduce a bug where multiple names match $USER... TODO
   AWS_MFA_SERIAL_NUMBER=$(cat ~/.aws/mfa-serial-numbers | grep $USER)
 
   if [ -z $AWS_MFA_SERIAL_NUMBER ]; then
@@ -18,26 +15,19 @@ function AwsMfaLogin () {
     return 1
   fi
 
-  if ! [ -f ~/.aws/credentials.$USER ]; then
-    echo "Missing base credentials: ~/.aws/credentials.$USER"
-    return 1
-  fi
+  function AwsConfigure () {
+    aws --profile default configure set aws_access_key_id $1
+    aws --profile default configure set aws_secret_access_key $2
+    aws --profile default configure set aws_session_token $3
+  }
 
-  cp ~/.aws/credentials.$USER ~/.aws/credentials
-
-  aws \
-    --output text \
-    sts get-session-token \
-    --duration-seconds 900 \
-    --serial-number $AWS_MFA_SERIAL_NUMBER \
-    --token $TOKEN |
-    cut -f 2,4,5 |
-    awk '{
-      print "[default]"
-      print "aws_access_key_id = "$1
-      print "aws_secret_access_key = "$2
-      print "aws_session_token = "$3
-    }' > ~/.aws/temp
-
-  mv ~/.aws/temp ~/.aws/credentials
+  AwsConfigure $(aws \
+      --output text \
+      --profile $USER \
+      sts get-session-token \
+      --duration-seconds 900 \
+      --serial-number $AWS_MFA_SERIAL_NUMBER \
+      --token $TOKEN |
+    cut -f 2,4,5
+  )
 }
