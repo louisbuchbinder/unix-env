@@ -30,4 +30,6 @@ function AwsMfaLogin () {
       --token $TOKEN |
     cut -f 2,4,5
   )
+
+  unset AwsConfigure
 }
