@@ -27,7 +27,8 @@ function AwsLogin() {
       --output text \
       --query Credentials.[AccessKeyId,SecretAccessKey,SessionToken] \
       --token-code $token \
-      --serial-number $serial
+      --serial-number $serial \
+      --duration-seconds 3600
   )
 
   unset _configure
