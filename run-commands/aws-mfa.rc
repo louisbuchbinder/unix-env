@@ -11,7 +11,7 @@ function AwsLogin() {
   serial=$(aws configure --profile $profile get mfa_serial)
 
   if [[ -z $serial ]]; then
-    echo 'ERROR: Expected a mfa_serial in the .aws/config'
+    echo 'ERROR: Expected a mfa_serial in the ~/.aws/config'
     return 1
   fi
 
