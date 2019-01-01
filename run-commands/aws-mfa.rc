@@ -1,35 +1,34 @@
-function AwsMfaLogin () {
-  local USER=$1
-  local TOKEN=$2
+function AwsLogin() {
+  local profile=$1
+  local token=$2
+  local serial
 
-  if [ -z $TOKEN ] || [ -z $USER ]; then
-  	echo "Usage: AwsMfaLogin <USER> <TOKEN>"
-  	return 1
-  fi
-
-  # This could introduce a bug where multiple names match $USER... TODO
-  AWS_MFA_SERIAL_NUMBER=$(cat ~/.aws/mfa-serial-numbers | grep $USER)
-
-  if [ -z $AWS_MFA_SERIAL_NUMBER ]; then
-    echo "Expected a MFA Serial Number"
+  if [[ -z $profile ]] || [[ -z $token ]]; then 
+    echo 'Usage: AwsLogin <profile> <token>'
     return 1
   fi
 
-  function AwsConfigure () {
-    aws --profile default configure set aws_access_key_id $1
-    aws --profile default configure set aws_secret_access_key $2
-    aws --profile default configure set aws_session_token $3
+  serial=$(aws configure --profile $profile get mfa_serial)
+
+  if [[ -z $serial ]]; then
+    echo 'ERROR: Expected a mfa_serial in the .aws/config'
+    return 1
+  fi
+
+  function _configure() {
+    aws configure set aws_access_key_id $1
+    aws configure set aws_secret_access_key $2
+    aws configure set aws_session_token $3
   }
 
-  AwsConfigure $(aws \
+  _configure $(
+    aws sts get-session-token \
+      --profile $profile \
       --output text \
-      --profile $USER \
-      sts get-session-token \
-      --duration-seconds 3600 \
-      --serial-number $AWS_MFA_SERIAL_NUMBER \
-      --token $TOKEN |
-    cut -f 2,4,5
+      --query Credentials.[AccessKeyId,SecretAccessKey,SessionToken] \
+      --token-code $token \
+      --serial-number $serial
   )
 
-  unset AwsConfigure
+  unset _configure
 }
