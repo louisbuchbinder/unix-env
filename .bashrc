@@ -1,4 +1,5 @@
 set -o vi
+PATH=$PATH:~/.bin
 
 alias ctags="`brew --prefix`/bin/ctags"
 
