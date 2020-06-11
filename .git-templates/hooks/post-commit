@@ -1,0 +1,13 @@
+#!/bin/sh
+function run_ctags () {
+  local timestamp=`date +%s`
+  local tagfile=.git/tags
+  local tagfile_tmp=${tagfile}_tmp_${timestamp}
+
+  (
+    ctags -f $tagfile_tmp . 2> /dev/null > /dev/null
+    mv $tagfile_tmp $tagfile
+  ) &
+}
+
+run_ctags

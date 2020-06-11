@@ -1,0 +1,7 @@
+[user]
+	name = Louis Buchbinder
+	email = git@louisbuchbinder.com
+[init]
+	templatedir = ~/.git-templates
+[push]
+	default = current
