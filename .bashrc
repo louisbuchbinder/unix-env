@@ -7,48 +7,48 @@ alias ll='ls -l '
 alias la='ls -la '
 
 function git-add {
-	local FILES="$*"
+  local FILES="$*"
 
-	if [ -z "$FILES" ]; then
-		FILES='.'
-	fi
+  if [ -z "$FILES" ]; then
+    FILES='.'
+  fi
 
-	git add $FILES
+  git add $FILES
 }
 
 function git-commit {
-	local ARGS="$*"
-	local MESSAGE=${1?"ERROR: expected a commit message to be defined. Usage: gc message [flags]"}
-	local FLAGS=${ARGS:${#MESSAGE}}
+  local MESSAGE=${1?"ERROR: expected a commit message to be defined. Usage: gc message [flags]"}
+  shift
+  local FLAGS=${*}
 
-	git commit -m "$MESSAGE" $FLAGS
+  git commit -m "$MESSAGE" $FLAGS
 }
 
 function git-squash {
-	local USAGE='Usage: gsquash commits message'
-	local COMMITS=${1?"ERROR: expected a number of commits to squash. $USAGE"}
-	local MESSAGE=${2?"ERROR: expected a squash-commit message. $USAGE"}
+  local USAGE='Usage: gsquash commits message'
+  local COMMITS=${1?"ERROR: expected a number of commits to squash. $USAGE"}
+  local MESSAGE=${2?"ERROR: expected a squash-commit message. $USAGE"}
 
-	if [ `echo $COMMITS | egrep -v '^[0-9]+$'` ]; then
-		echo "ERROR: expected a number of commits to squash\n $USAGE"
-		return 1
-	fi
+  if [ `echo $COMMITS | egrep -v '^[0-9]+$'` ]; then
+    echo "ERROR: expected a number of commits to squash\n $USAGE"
+    return 1
+  fi
 
-	if 	! git reset --soft HEAD~$COMMITS ||
-			! git commit -m "$MESSAGE"; then
-		echo "gsquash utility failed"
-		return 1
-	fi
+  if  ! git reset --soft HEAD~$COMMITS ||
+      ! git commit -m "$MESSAGE"; then
+    echo "gsquash utility failed"
+    return 1
+  fi
 }
 
 function git-delete-branch {
-	local BRANCHES="${@?'Expected a branch argument. Usage delete-branch branch [branches]'}"
-	local BRANCH
+  local BRANCHES="${@?'Expected a branch argument. Usage delete-branch branch [branches]'}"
+  local BRANCH
 
-	for BRANCH in "$BRANCHES"; do
-		git branch -D $BRANCH
-		git push --delete origin $BRANCH --no-verify
-	done
+  for BRANCH in "$BRANCHES"; do
+    git branch -D $BRANCH
+    git push --delete origin $BRANCH --no-verify
+  done
 }
 
 alias gb='git branch -v'
