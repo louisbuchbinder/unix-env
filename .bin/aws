@@ -1,0 +1,7 @@
+#!/bin/bash
+docker run \
+  --rm \
+  -i \
+  -v ~/.aws:/root/.aws \
+  amazon/aws-cli \
+  "$@"

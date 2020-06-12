@@ -6,11 +6,6 @@ alias ctags="`brew --prefix`/bin/ctags"
 alias ll='ls -l '
 alias la='ls -la '
 
-alias aws='docker run --rm -it -v ~/.aws:/root/.aws amazon/aws-cli '
-alias node='docker run --rm -it --workdir /app -v $(pwd):/app -v /tmp:/tmp -e NODE_REPL_HISTORY=/tmp/.node_repl_history node:14.4-alpine '
-alias npm='docker run --rm -it --workdir /app -v $(pwd):/app --entrypoint npm node:14.4-alpine '
-alias terraform='docker run --rm -it --workdir /app -v $(pwd):/app -v ~/.aws:/root/.aws hashicorp/terraform:0.12.21 '
-
 function git-add {
   local FILES="$*"
 

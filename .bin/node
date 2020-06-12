@@ -1,0 +1,10 @@
+#!/bin/bash
+docker run \
+  --rm \
+  -i \
+  --workdir /app \
+  -v $(pwd):/app \
+  -v /tmp:/tmp \
+  -e NODE_REPL_HISTORY=/tmp/.node_repl_history \
+  node:14.4-alpine \
+  "$@"
