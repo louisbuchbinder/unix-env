@@ -5,5 +5,5 @@ docker run \
   --workdir /app \
   -v $(pwd):/app \
   -v ~/.aws:/root/.aws \
-  hashicorp/terraform:0.12.21 \
+  terraform \
   "$@"
