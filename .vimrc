@@ -12,6 +12,12 @@ augroup gne
   autocmd BufNewFile,BufRead *.gne set syntax=php
 augroup END
 
+" remove trailing whitespace
+" * disable this feature with :autocmd! remove_trailing_whitespace
+augroup remove_trailing_whitespace
+  autocmd BufWritePre * %s/\s\+$//e
+augroup END
+
 " load the cwd .vimrc
 set exrc
 
