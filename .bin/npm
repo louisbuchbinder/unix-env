@@ -1,9 +1,0 @@
-#!/bin/bash
-docker run \
-  --rm \
-  -i \
-  --workdir /app \
-  -v $(pwd):/app \
-  --entrypoint npm \
-  node:14.4-alpine \
-  "$@"
