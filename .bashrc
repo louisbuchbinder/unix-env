@@ -1,6 +1,9 @@
 set -o vi
 PATH=$PATH:~/.bin
 
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
 alias ctags="`brew --prefix`/bin/ctags"
 
 alias ll='ls -l '
@@ -25,7 +28,7 @@ function git-commit {
 }
 
 function git-squash {
-  local USAGE='Usage: gsquash commits message'
+  local USAGE='Usage: git-squash commits message'
   local COMMITS=${1?"ERROR: expected a number of commits to squash. $USAGE"}
   local MESSAGE=${2?"ERROR: expected a squash-commit message. $USAGE"}
 
@@ -36,7 +39,7 @@ function git-squash {
 
   if  ! git reset --soft HEAD~$COMMITS ||
       ! git commit -m "$MESSAGE"; then
-    echo "gsquash utility failed"
+    echo "git-squash utility failed"
     return 1
   fi
 }
@@ -71,3 +74,13 @@ alias gdb='git-delete-branch '
 alias ga='git-add '
 alias gc='git-commit '
 alias gac='ga && gc '
+
+alias dco='docker-compose '
+alias dcou='docker-compose up '
+alias dcoud='docker-compose up --detach '
+alias dcoudr='docker-compose up --detach --force-recreate '
+alias dcops='docker-compose ps '
+alias dcod='docker-compose down '
+alias dcol='docker-compose logs '
+alias dcolf='docker-compose logs -f '
+alias dcoe='docker-compose exec '
