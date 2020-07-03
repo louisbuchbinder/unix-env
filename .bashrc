@@ -2,7 +2,12 @@ set -o vi
 PATH=$PATH:~/.bin
 
 export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+
+alias aws="$HOME/aws-cli/aws "
+alias aws_completer="$HOME/aws-cli/aws_completer "
 
 alias ctags="`brew --prefix`/bin/ctags"
 
