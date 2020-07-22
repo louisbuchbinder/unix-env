@@ -32,6 +32,6 @@ for [pid, command] in running:
   os.remove(tmpfile)
 
 ctags = subprocess.run(['ctags', '-f', tagfile_temp, '.'], stderr=subprocess.DEVNULL)
-if ctags.returncode == 0:
+if ctags.returncode == 0 and os.path.isfile(tagfile_temp):
   subprocess.run(['mv', tagfile_temp, tagfile])
 
