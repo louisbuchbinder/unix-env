@@ -7,6 +7,11 @@ set tabstop=2 shiftwidth=2 expandtab
 filetype plugin indent on
 syntax on
 
+" use graphql syntax for *.prisma
+augroup grpahql
+  autocmd BufNewFile,BufRead *.prisma setfiletype graphql
+augroup END
+
 " use php syntax highlighting for *.gne
 augroup gne
   autocmd BufNewFile,BufRead *.gne set syntax=php
