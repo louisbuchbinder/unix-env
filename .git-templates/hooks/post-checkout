@@ -1,2 +1,4 @@
 #!/bin/sh
-run-ctags.py &
+if command -v run-ctags.py> /dev/null; then
+  run-ctags.py &
+fi
