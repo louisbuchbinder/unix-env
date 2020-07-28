@@ -25,3 +25,10 @@ cd ~/.vim/pack/jparise/start
 git clone https://github.com/jparise/vim-graphql.git graphql
 vim -u NONE -c "helptags graphql/doc" -c q
 ```
+
+## Text Edit
+- Disable the app centric open panel:
+```
+defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
+```
+- Set to "Plain text" in the preferences
