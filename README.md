@@ -26,6 +26,11 @@ git clone https://github.com/jparise/vim-graphql.git graphql
 vim -u NONE -c "helptags graphql/doc" -c q
 ```
 
+## Vim Typescript Syntax Highlighting
+```
+git clone https://github.com/leafgarland/typescript-vim.git ~/.vim/pack/typescript/start/typescript-vim
+```
+
 ## Cloudflare DNS
 - Use cloudflare as the dns server: [https://1.1.1.1/dns/]()
 
