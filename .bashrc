@@ -7,7 +7,9 @@ if ps -o command= $$| grep bash > /dev/null; then
   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
 
-alias ctags="`brew --prefix`/bin/ctags"
+if test command -v brew &> /dev/null; then
+  alias ctags="`brew --prefix`/bin/ctags"
+fi
 
 alias ll='ls -l '
 alias la='ls -la '
