@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+
+# DISABLE CTAGS
+exit()
+
 import hashlib, os, subprocess, time
 timestamp = str(int(time.time()))
 dedupe = hashlib.md5(os.getcwd().encode()).hexdigest()[0:8]
