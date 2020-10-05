@@ -1,5 +1,5 @@
 set -o vi
-PATH=$PATH:~/.bin:~/aws-cli
+PATH=$PATH:~/.bin:~/aws-cli:/usr/local/go/bin
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
