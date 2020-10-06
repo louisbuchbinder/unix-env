@@ -78,7 +78,7 @@ alias gprum='git pull --rebase upstream master'
 alias gprom='git pull --rebase origin master'
 alias gprod='git pull --rebase origin develop'
 alias gdb='git-delete-branch '
-alias ga='git-add '
+alias ga="git-add "
 alias gc='git-commit '
 alias gac='ga && gc '
 
