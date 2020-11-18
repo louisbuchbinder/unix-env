@@ -91,3 +91,5 @@ alias dcod='docker-compose down '
 alias dcol='docker-compose logs '
 alias dcolf='docker-compose logs -f '
 alias dcoe='docker-compose exec '
+
+alias grep='grep --exclude-dir node_modules --exclude-dir .git --exclude-dir .terraform --exclude-dir tmp --exclude-dir build --exclude-dir .build --exclude-dir .pyc '
