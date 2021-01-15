@@ -92,4 +92,4 @@ alias dcol='docker-compose logs '
 alias dcolf='docker-compose logs -f '
 alias dcoe='docker-compose exec '
 
-alias grep='grep --exclude-dir node_modules --exclude-dir .git --exclude-dir .terraform --exclude-dir tmp --exclude-dir build --exclude-dir .build --exclude-dir .pyc --exclude package-lock.json --exclude yarn.lock --exclude yarn-error.log '
+alias grep='grep --exclude-dir node_modules --exclude-dir .git --exclude-dir .terraform --exclude-dir tmp --exclude-dir build --exclude-dir .build --exclude-dir .webpack --exclude-dir .pyc --exclude package-lock.json --exclude yarn.lock --exclude yarn-error.log '
