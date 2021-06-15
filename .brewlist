@@ -1,5 +1,7 @@
+fastlane
 jq
 nvm
 python
 tmux
+watchman
 yarn
