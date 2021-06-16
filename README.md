@@ -1,6 +1,6 @@
 ## Symlink the config files into `~`
 ```
-for file in $(find $(pwd) -maxdepth 1 -mindepth 1 ! -name README.md ! -name .git); do
+for file in $(find $(pwd) -maxdepth 1 -mindepth 1 ! -name README.md ! -name .git ! -name .gitignore ! -name .DS_Store); do
   if ! test -L ~/$(basename $file); then
     ln -s $file ~/$(basename $file)
   fi
