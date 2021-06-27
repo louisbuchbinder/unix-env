@@ -1,10 +1,28 @@
 ## Symlink the config files into `~`
 ```
-for file in $(find $(pwd) -maxdepth 1 -mindepth 1 ! -name README.md ! -name .git ! -name .gitignore ! -name .DS_Store ! -name \*.swp); do
+for file in $(
+  find $(pwd) \
+    -maxdepth 1 \
+    -mindepth 1 \
+    ! -name README.md \
+    ! -name .git \
+    ! -name .gitignore \
+    ! -name .DS_Store \
+    ! -name \*.swp \
+    ! -name karabiner.json \
+); do
   if ! test -L ~/$(basename $file); then
     ln -s $file ~/$(basename $file)
   fi
 done
+
+mkdir -p ~/.config/karabiner
+if
+  test -f $(pwd)/karabiner.json &&
+  ! test -L ~/.config/karabiner/karabiner.json
+then
+  ln -s $(pwd)/karabiner.json ~/.config/karabiner/karabiner.json
+fi
 ```
 
 ## Install Xcode Select
@@ -37,6 +55,13 @@ gem install $(cat ~/.gemlist)
 
 ## Install Android Studio
 - https://developer.android.com/studio/
+
+## Install Karabiner
+- https://karabiner-elements.pqrs.org
+- provide permissions for karabiner_grabber and karabiner_observer:
+- - System Preferences > Security & Privacy > Input Monitoring
+- - Files located in `/Library/ApplicationSupport/org.pqrs/Karabiner-Elements/bin/`
+- Open Karabiner-Elements > Misc > Copy the current configuration to the sysem configuration
 
 ## Vim GraphQL Syntax Highlighting
 ```
@@ -71,7 +96,6 @@ mkdir -p ~/.vim/pack/vim-jsx-typescript/start
 cd $_
 git clone git@github.com:peitalin/vim-jsx-typescript.git
 ```
-
 
 ## Cloudflare DNS
 - Use cloudflare as the dns server: [https://1.1.1.1/dns/]()
