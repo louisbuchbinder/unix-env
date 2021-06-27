@@ -1,6 +1,14 @@
 set -o vi
 PATH=$PATH:~/.bin:~/aws-cli:/usr/local/go/bin
 
+if ! test -L ~/.config/karabiner/karabiner.json; then
+  # If you modify the karabiner config using the Karabiner-Elements
+  # application then the karabiner.json file is overwritted. Instead
+  # the changes should be made to the unix-env/karabiner.json and
+  # symlinked into the ~/.config/karabiner/karabiner.json
+  >&2 echo 'WARNING: ~/.config/karabiner/karabiner.json is not symlinked'
+fi
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 if ps -o command= $$| grep bash > /dev/null; then
